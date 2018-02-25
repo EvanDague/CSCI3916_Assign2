@@ -3,6 +3,7 @@
  */
 'use strict;';
 //Include crypto to generate the movie id
+var app = require('../app');
 var crypto = require('crypto');
 module.exports = function () {
     return {

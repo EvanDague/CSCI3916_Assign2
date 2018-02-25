@@ -1,10 +1,9 @@
 var express = require('express');
-var http = require('http');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var authController = require('./auth');
 var authJwtController = require('./auth_jwt');
-db = require('./db')(); //global hack
+db = require('./db'); //global hack
 var jwt = require('jsonwebtoken');
 
 var app = express();
@@ -62,7 +61,7 @@ router.post('/signin', function(req, res) {
         }
         else {
             // check if password matches
-            if (req.body.password == user.password)  {
+            if (req.body.password === user.password)  {
                 var userToken = { id : user.id, username: user.username };
                 var token = jwt.sign(userToken, process.env.SECRET_KEY);
                 res.json({success: true, token: 'JWT ' + token});
@@ -70,7 +69,7 @@ router.post('/signin', function(req, res) {
             else {
                 res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
             }
-        };
+        }
 });
 
 app.use('/', router);
