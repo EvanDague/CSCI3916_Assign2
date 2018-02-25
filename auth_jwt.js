@@ -1,6 +1,5 @@
 // Load required packages
 var passport = require('passport');
-var app = require('../app');
 var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 

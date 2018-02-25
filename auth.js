@@ -1,7 +1,6 @@
 // Load required packages
 var passport = require('passport');
 var BasicStrategy = require('passport-http').BasicStrategy;
-var app = require('../app');
 
 passport.use(new BasicStrategy(
     function(username, password, done) {
