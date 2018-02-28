@@ -1,0 +1,314 @@
+{
+	"info": {
+		"name": "CSCI3916",
+		"_postman_id": "211b1ff6-bb8a-703e-04b4-490f693d414e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Assign1_TuringBooks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62c31e34-f0bc-41c8-8bc4-7924859bef1a",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"var bookID = jsonData.items[0].id;",
+							"postman.setEnvironmentVariable(\"id\", bookID);",
+							"",
+							"var title = jsonData.items[0].volumeInfo.title;",
+							"var patt = /turing/i;",
+							"var res = patt.test(title);",
+							"",
+							"tests[\"Book title includes turing\"] = (res === true);",
+							"tests[\"Status code 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://www.googleapis.com/books/v1/volumes?q={{book_title}}",
+					"protocol": "https",
+					"host": [
+						"www",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"books",
+						"v1",
+						"volumes"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{book_title}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Assign1_TuringID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dd1782ea-e960-4c10-8f5c-5a23b841e579",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"var bookID = jsonData.items[0].id;",
+							"",
+							"tests[\"Book ID is correct\"] = (bookID === postman.getEnvironmentVariable(\"id\"));",
+							"tests[\"Status code 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://www.googleapis.com/books/v1/volumes?q={{id}}",
+					"protocol": "https",
+					"host": [
+						"www",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"books",
+						"v1",
+						"volumes"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{id}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Assign2_ServerEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "00882477-8da4-4a48-8809-f2a5c9ad6651",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Id\":1234,\n\t\"test\":\"echo\"\n}"
+				},
+				"url": {
+					"raw": "https://csci3916-assign2.herokuapp.com/post",
+					"protocol": "https",
+					"host": [
+						"csci3916-assign2",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Assign2_ServerEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "574ef19f-4119-437b-ae49-202b6003d79f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://csci3916-assign2.herokuapp.com/get",
+					"protocol": "https",
+					"host": [
+						"csci3916-assign2",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"get"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Assign2_ServerEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "97b714be-c95b-49ff-b177-5dc0c5162eed",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://csci3916-assign2.herokuapp.com/put",
+					"protocol": "https",
+					"host": [
+						"csci3916-assign2",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"put"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Assign2_ServerEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0e2166b9-a818-4f04-a958-9c199832f622",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://csci3916-assign2.herokuapp.com/delete",
+					"protocol": "https",
+					"host": [
+						"csci3916-assign2",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"delete"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Assign2_ServerEcho",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a1abde9-c327-4918-a660-e6ccea4b089c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "cu",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "testuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://csci3916-assign2.herokuapp.com/delete",
+					"protocol": "https",
+					"host": [
+						"csci3916-assign2",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"delete"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
