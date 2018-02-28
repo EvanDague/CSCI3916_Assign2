@@ -15,7 +15,7 @@ app.use(passport.initialize());
 var router = express.Router();
 
 router.route('/post')
-    .post(authController.isAuthenticated, function (req, res) {
+    .post(function (req, res) {
             console.log(req.body);
             res = res.status(200);
             if (req.get('Content-Type')) {
